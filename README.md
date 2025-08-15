@@ -11,19 +11,22 @@ This package provides a `go-git` binary that runs `go fmt ./...` before executin
 3. Provide clear feedback about the formatting and staging process
 
 ## Installation
-
 ### Quick Install
 
 Run the installer to set up `go-git` and configure your shell:
 
 ```bash
-go run ./install
+go run github.com/Bantamlak12/gitaddfmt/installer@latest
 ```
 
 This will:
-- Install the `go-git` binary to your `$GOPATH/bin`
-- Add a `go` function to your shell configuration (`.bashrc`, `.zshrc`, or PowerShell profile)
-- Allow you to use `go git` syntax instead of `go-git`
+
+* Install the `go-git` binary to your `$GOPATH/bin`
+* Add a `go` function to your shell configuration (`.bashrc`, `.zshrc`, or PowerShell profile\`)
+* Immediately reload your shell so `go git` is available without restarting
+* Allow you to use `go git` syntax instead of `go-git`
+
+---
 
 ### Manual Installation
 
@@ -31,9 +34,9 @@ If you prefer to install manually:
 
 ```bash
 # Install the go-git binary
-go install ./go-git
+go install github.com/Bantamlak12/gitaddfmt/go-git@latest
 
-# Add the go function to your shell config (see shell configuration below)
+# Manually add the go function to your shell config (see Shell Configuration section below)
 ```
 
 ## Usage
