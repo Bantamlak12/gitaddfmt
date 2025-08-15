@@ -19,12 +19,16 @@ func main() {
 			os.Exit(1)
 		}
 	}
-
+	fmt.Println("Go code formated.")
 	args := os.Args[1:]
 	cmd := exec.Command("git", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		os.Exit(1)
+	}
+
+	if os.Args[1] == "add" && len(os.Args) > 2 {
+		fmt.Println("Go code staged to git.")
 	}
 }
