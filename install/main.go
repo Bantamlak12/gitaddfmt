@@ -11,8 +11,8 @@ import (
 func main() {
 	fmt.Println("Installing go-git...")
 
-	//cmd := exec.Command("go", "install", "github.com/Bantamlak12/gitaddfmt/go-git@latest")
-	cmd := exec.Command("go", "install", "./go-git")
+	cmd := exec.Command("go", "install", "github.com/Bantamlak12/gitaddfmt/go-git@latest")
+	//cmd := exec.Command("go", "install", "./go-git")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
