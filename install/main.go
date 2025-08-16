@@ -20,6 +20,9 @@ func main() {
 		os.Exit(1)
 	}
 	home, _ := os.UserHomeDir()
+	shell := os.Getenv("SHELL")
+	var rcFilePath string
+
 	switch runtime.GOOS {
 	case "windows":
 		profile := filepath.Join(home, "Documents", "PowerShell", "Microsoft.PowerShell_profile.ps1")
@@ -32,16 +35,23 @@ function go {
 	else { & go.exe $sub @rest }
 }
 `)
-
 		exec.Command("powershell", "-NoProfile", "-Command", "& { . $PROFILE }").Run()
 		fmt.Println("Close and reopen powershell to start using 'go git add'")
 
 	default:
-		for _, shellRC := range []string{".bashrc", ".zshrc"} {
-			rcPath := filepath.Join(home, shellRC)
-			f, _ := os.OpenFile(rcPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-			defer f.Close()
-			f.WriteString(`
+		switch {
+		case filepath.Base(shell) == "bash":
+			rcFilePath = filepath.Join(home, ".bashrc")
+		case filepath.Base(shell) == "zsh":
+			rcFilePath = filepath.Join(home, ".zshrc")
+		default:
+			rcFilePath = filepath.Join(home, ".bashrc")
+		}
+
+		f, _ := os.OpenFile(rcFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		defer f.Close()
+
+		f.WriteString(`
 # Go function to use 'go git' syntax instead of go-git
 go() {
     if [ "$1" = "git" ]; then
@@ -52,21 +62,6 @@ go() {
     fi
 }
 	`)
-		}
-		shell := os.Getenv("SHELL")
-		var rcFile string
-
-		switch {
-		case shell == "":
-			rcFile = filepath.Join(home, ".bashrc")
-		case filepath.Base(shell) == "bash":
-			rcFile = filepath.Join(home, ".bashrc")
-		case filepath.Base(shell) == "zshrc":
-			rcFile = filepath.Join(home, ".zshrc")
-		default:
-			rcFile = filepath.Join(home, ".bashrc")
-		}
-		exec.Command("bash", "-c", "source "+rcFile).Run()
-		// fmt.Println("Added 'go git' alias to your shell config. Restart terminal or run 'source ~/.bashrc'")
+		exec.Command("bash", "-c", "source "+rcFilePath).Run()
 	}
 }

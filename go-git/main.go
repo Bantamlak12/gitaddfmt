@@ -14,11 +14,15 @@ func main() {
 
 	if os.Args[1] == "add" {
 		fmt.Println("Formatting Go code...")
-		if err := exec.Command("go", "fmt", "./...").Run(); err != nil {
-			fmt.Println("Formatting failed:", err)
+
+		cmd := exec.Command("go", "fmt", "./...")
+		output, err := cmd.CombinedOutput()
+		if err != nil {
+			fmt.Printf("Formatting failed. Check the following errors: \n%s", output)
 			os.Exit(1)
 		}
 	}
+
 	fmt.Println("Go code formated.")
 	args := os.Args[1:]
 	cmd := exec.Command("git", args...)
