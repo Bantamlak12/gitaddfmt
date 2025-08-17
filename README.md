@@ -30,27 +30,26 @@ This will:
 
 ### Manual Installation
 
-If you prefer to install manually:
-
+If you prefer to install manually, install the go-git binary
 ```bash
-# Install the go-git binary
 go install github.com/Bantamlak12/gitaddfmt/go-git@latest
-
-# Manually add the go function to your shell config (see Shell Configuration section below)
 ```
+Manually add the go function to your shell config (see Shell Configuration section below)
 
 ## Usage
 
 After installation, you can use the `go git` command just like regular git commands:
 
+Format code and add specific files
 ```bash
-# Format code and add specific files
 go git add main.go utils.go
-
-# Format code and add all files
+```
+Format code and add all files
+```
 go git add .
-
-# Other git commands work normally
+```
+Other git commands work normally
+```
 go git commit -m "feat: add new feature"
 go git status
 go git log
@@ -126,7 +125,7 @@ This project is open source. Feel free to use and modify as needed.
 ### Command not found: go-git
 Make sure the binary is installed and `$GOPATH/bin` is in your PATH:
 ```bash
-go install ./go-git
+go install github.com/Bantamlak12/gitaddfmt/go-git@latest
 echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
