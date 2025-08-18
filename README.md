@@ -16,7 +16,7 @@ This package provides a `go-git` binary that runs `go fmt ./...` before executin
 Run the installer to set up `go-git` and configure your shell:
 
 ```bash
-go run github.com/Bantamlak12/gitaddfmt/installer@latest
+go run github.com/Bantamlak12/gitaddfmt/installer@v0.1.0
 ```
 
 This will:
@@ -32,7 +32,7 @@ This will:
 
 If you prefer to install manually, install the go-git binary
 ```bash
-go install github.com/Bantamlak12/gitaddfmt/go-git@latest
+go install github.com/Bantamlak12/gitaddfmt/go-git@v0.1.0
 ```
 Manually add the go function to your shell config (see Shell Configuration section below)
 
@@ -125,7 +125,7 @@ This project is open source. Feel free to use and modify as needed.
 ### Command not found: go-git
 Make sure the binary is installed and `$GOPATH/bin` is in your PATH:
 ```bash
-go install github.com/Bantamlak12/gitaddfmt/go-git@latest
+go install github.com/Bantamlak12/gitaddfmt/go-git@v0.1.0
 echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
